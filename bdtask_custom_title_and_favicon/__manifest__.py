@@ -22,7 +22,7 @@
         'web'
     ],
     'data': [
-        'data/demo_data.xml',
+        # 'data/demo_data.xml',
         'views/favicon.xml',
     ],
     'assets': {
