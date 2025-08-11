@@ -14,10 +14,17 @@ class PurchaseOrder(models.Model):
 
     LIMIT_AMOUNT = 1000 
 
-    def button_confirm(self):
+    @api.depends('amount_total')
+    def _compute_approval_state(self):
         for order in self:
             if order.amount_total >= self.LIMIT_AMOUNT and order.approval_state != 'approved':
                 order.approval_state = 'to_approve'
+
+
+    def button_confirm(self):
+        for order in self:
+            if order.amount_total >= self.LIMIT_AMOUNT and order.approval_state != 'approved':
+                order.write({'approval_state': 'to_approve'})
                 raise UserError(_("This order exceeds the {:,.0f} limit and must be approved first.").format(self.LIMIT_AMOUNT))
         return super().button_confirm()
 
