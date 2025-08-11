@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_/mnt/extra-addons/smitiv_purchase_order_/mnt/extra-addons/smitiv_purchase_order,/mnt/extra-addons/smitiv_purchase_order./mnt/extra-addons/smitiv_purchase_order,model_/mnt/extra-addons/smitiv_purchase_order_/mnt/extra-addons/smitiv_purchase_order,base.group_user,1,1,1,1
