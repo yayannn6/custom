@@ -14,7 +14,7 @@ class PurchaseOrder(models.Model):
 
     LIMIT_AMOUNT = 1000 
 
-    @api.depends('amount_total')
+    @api.onchange('amount_total')
     def _compute_approval_state(self):
         limit = float(self.env['ir.config_parameter'].sudo().get_param('purchase.approval_limit_amount', default=0))
         for order in self:
