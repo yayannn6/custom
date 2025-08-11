@@ -10,7 +10,7 @@ class PurchaseOrder(models.Model):
         ('draft', 'Draft'),
         ('to_approve', 'To Approve'),
         ('approved', 'Approved')
-    ], string="Approval Status", default="draft", tracking=True)
+    ], string="Approval Status", default="draft")
 
     LIMIT_AMOUNT = 1000 
 
