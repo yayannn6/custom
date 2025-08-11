@@ -5,23 +5,19 @@
         <field name="inherit_id" ref="base.view_res_config_settings"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block" data-string="Purchase Settings" string="Purchase Settings">
-                    <h2>Purchase Approval</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
-                                <field name="purchase_limit_amount"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="purchase_limit_amount"/>
-                                <div class="text-muted">
-                                    Set the purchase amount limit that requires approval.
-                                </div>
-                            </div>
+                <div class="o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="purchase_limit_amount"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="purchase_limit_amount"/>
+                        <div class="text-muted">
+                            Set the purchase amount limit that requires approval.
                         </div>
                     </div>
                 </div>
             </xpath>
         </field>
     </record>
+
 </odoo>
