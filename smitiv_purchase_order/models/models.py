@@ -16,16 +16,18 @@ class PurchaseOrder(models.Model):
 
     @api.depends('amount_total')
     def _compute_approval_state(self):
+        limit = float(self.env['ir.config_parameter'].sudo().get_param('purchase.approval_limit_amount', default=0))
         for order in self:
-            if order.amount_total >= self.LIMIT_AMOUNT and order.approval_state != 'approved':
+            if order.amount_total >= limit and order.approval_state != 'approved':
                 order.approval_state = 'to_approve'
 
 
     def button_confirm(self):
+        limit = float(self.env['ir.config_parameter'].sudo().get_param('purchase.approval_limit_amount', default=0))
         for order in self:
-            if order.amount_total >= self.LIMIT_AMOUNT and order.approval_state != 'approved':
+            if order.amount_total >= limit and order.approval_state != 'approved':
                 order.write({'approval_state': 'to_approve'})
-                raise UserError(_("This order exceeds the {:,.0f} limit and must be approved first.").format(self.LIMIT_AMOUNT))
+                raise UserError(_("This order exceeds the {:,.0f} limit and must be approved first.").format(limit))
         return super().button_confirm()
 
     def action_approve_order(self):
