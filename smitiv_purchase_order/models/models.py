@@ -10,7 +10,7 @@ class PurchaseOrder(models.Model):
         ('draft', 'Draft'),
         ('to_approve', 'To Approve'),
         ('approved', 'Approved')
-    ], string="Approval Status", default="draft")
+    ], string="Approval Status", default="to_approve")
 
     LIMIT_AMOUNT = 1000 
 
@@ -28,6 +28,8 @@ class PurchaseOrder(models.Model):
             if order.amount_total >= limit and order.approval_state != 'approved':
                 order.write({'approval_state': 'to_approve'})
                 raise UserError(_("This order exceeds the {:,.0f} limit and must be approved first.").format(limit))
+            else:
+                order.approval_state = 'approved'
         return super().button_confirm()
 
     def action_approve_order(self):
