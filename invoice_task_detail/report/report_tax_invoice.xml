@@ -1,0 +1,213 @@
+<odoo>
+
+<template id="report_invoice_task">
+    <t t-call="web.external_layout">
+
+        <t t-foreach="docs" t-as="o">
+
+            <!-- ⚠️ MAIN IS MANDATORY -->
+            <main>
+
+                <style>
+                    .invoice-title {
+                        text-align: center;
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    .header-table td {
+                        padding: 2px 5px;
+                        font-size: 12px;
+                        vertical-align: top;
+                    }
+                    .task-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        font-size: 12px;
+                        margin-top: 10px;
+                        border: 1px solid black;
+                    }
+                    .task-table th {
+                        border: 1px solid black;
+                    }
+
+                    .task-table td {
+                        padding: 5px;
+                    }
+
+                    .task-table tbody td {
+                        border-left: 1px solid black;
+                        border-right: 1px solid black;
+                        border-top: none;
+                        border-bottom: none;
+                    }
+
+                    .task-table tbody tr:last-child td {
+                        border-bottom: 1px solid black;
+                    }
+
+                    .text-right {
+                        text-align: right;
+                    }
+                    .text-center {
+                        text-align: center;
+                    }
+
+                    .total-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        font-size: 12px;
+                        margin-top: 10px;
+                    }
+                </style>
+
+                <!-- TITLE -->
+                <div class="invoice-title">TAX INVOICE</div>
+
+                <!-- HEADER -->
+                <table class="header-table" style="border: 1px solid black;" width="100%">
+                    <tr>
+                        <!-- LEFT -->
+                        <td width="50%" valign="top">
+                            <table width="100%">
+                                <tr>
+                                    <td width="30%"><strong>Date</strong></td>
+                                    <td width="5%">:</td>
+                                    <td width="65%"><span t-field="o.invoice_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>To</strong></td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="o.partner_id.name"/><br/>
+                                        <span t-field="o.partner_id.street"/><br/>
+                                        <span t-field="o.partner_id.city"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Attn</strong></td>
+                                    <td>:</td>
+                                    <td><span t-field="o.attn"/></td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <!-- RIGHT -->
+                        <td width="50%" valign="top">
+                            <table width="100%">
+                                <tr>
+                                    <td width="30%"><strong>Invoice Ref</strong></td>
+                                    <td width="5%">:</td>
+                                    <td width="65%"><span t-field="o.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Our Ref</strong></td>
+                                    <td>:</td>
+                                    <td><span t-field="o.ref"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PO Number</strong></td>
+                                    <td>:</td>
+                                    <td><span t-field="o.invoice_origin"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Terms</strong></td>
+                                    <td>:</td>
+                                    <td><span t-field="o.invoice_payment_term_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Page</strong></td>
+                                    <td>:</td>
+                                    <td>1 page</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <!-- TASK TABLE -->
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th width="55%">Description</th>
+                            <th width="10%">Qty</th>
+                            <th width="15%">Unit Price (S$)</th>
+                            <th width="20%">Total Price (S$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.task_line_ids" t-as="line">
+                            <tr>
+                                <td>
+                                    <t t-esc="line.description"/>
+                                </td>
+                                <td class="text-center">
+                                    <t t-if="line.quantity">
+                                        <t t-esc="line.quantity"/> <t t-esc="line.uom"/>
+                                    </t>
+                                </td>
+
+                                <td class="text-right">
+                                    <t t-if="line.price">
+                                        <t t-esc="line.price"/>
+                                    </t>
+                                </td>
+
+                                <td class="text-right">
+                                    <t t-if="line.total">
+                                        <t t-esc="line.total"/>
+                                    </t>
+                                </td>
+
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- TOTALS -->
+                <table class="total-table">
+                    <tr>
+                        <td width="80%" class="text-right"><strong>Subtotal</strong></td>
+                        <td width="20%" class="text-right">
+                            <t t-esc="o.amount_before_tax_manual"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="80%" class="text-right"><strong>GST 9%</strong></td>
+                        <td width="20%" class="text-right">
+                            <t t-esc="o.gst_amount"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="80%" class="text-right"><strong>Total</strong></td>
+                        <td width="20%" class="text-right">
+                            <t t-esc="o.grand_total"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- AMOUNT IN WORDS -->
+                <p style="font-size:12px;">
+                    <strong>
+                        Singapore Dollars :
+                        <t t-esc="o.currency_id.amount_to_text(o.grand_total)"/>
+                    </strong>
+                </p>
+
+                <!-- FOOTER -->
+                <p style="font-size:11px;">
+                    <span t-field="o.narration"/>
+                </p>
+
+                <h3 style="font-size:22px; font-weight:bold;">
+                    Kumar
+                </h3>
+
+            </main>
+
+        </t>
+    </t>
+</template>
+
+</odoo>
