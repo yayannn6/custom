@@ -1,6 +1,6 @@
 <odoo>
 
-<template id="report_invoice_task">
+<template id="report_mec_purchase_order">
     <t t-call="web.external_layout">
 
         <t t-foreach="docs" t-as="o">
@@ -29,7 +29,6 @@
                     }
                     .task-table th {
                         border: 1px solid black;
-                        padding: 5px;
                     }
 
                     .task-table td {
@@ -63,7 +62,7 @@
                 </style>
 
                 <!-- TITLE -->
-                <div class="invoice-title">TAX INVOICE</div>
+                <div class="invoice-title">PURCHASE ORDER</div>
 
                 <!-- HEADER -->
                 <table class="header-table" style="border: 1px solid black;" width="100%">
@@ -72,17 +71,15 @@
                         <td width="50%" valign="top">
                             <table width="100%">
                                 <tr>
-                                    <td width="30%"><strong>Date</strong></td>
+                                    <td width="30%"><strong>To</strong></td>
                                     <td width="5%">:</td>
-                                    <td width="65%"><span t-field="o.invoice_date"/></td>
+                                    <td width="65%"><span t-field="o.partner_id.name"/></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>To</strong></td>
+                                    <td><strong>QN</strong></td>
                                     <td>:</td>
                                     <td>
                                         <span t-field="o.partner_id.name"/><br/>
-                                        <span t-field="o.partner_id.street"/><br/>
-                                        <span t-field="o.partner_id.city"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -200,6 +197,10 @@
                 <p style="font-size:11px;">
                     <span t-field="o.narration"/>
                 </p>
+
+                <h3 style="font-size:22px; font-weight:bold;">
+                    Kumar
+                </h3>
 
             </main>
 

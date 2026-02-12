@@ -1,0 +1,122 @@
+<odoo>
+    <template id="report_purchase_requisition">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <main>
+
+                <div class="page">
+
+                    <div style="text-align:center; margin-bottom:10px;">
+                        <img src="/invoice_task_detail/static/src/img/header.png"
+                             style="max-width:100%; height:auto;"/>
+                    </div>
+                    <t t-if="o.state == 'draft'">
+                        <h2 style="text-align:center;">
+                            PURCHASE REQUISITION FORM
+                        </h2>
+                    </t>
+                    <t t-elif="o.state == 'sent'">
+                        <h2 style="text-align:center;">
+                            PURCHASE REQUEST FORM
+                        </h2>
+                    </t>
+                    <t t-elif="o.state == 'purchase'">
+                        <h2 style="text-align:center;">
+                            PURCHASE ORDER FORM
+                        </h2>
+                    </t>
+                    
+                    <table style="width:100%; border:1px solid black; border-collapse:collapse;">
+                        <tr>
+                            <td style="width:50%; padding:5px;">
+                                <strong>Date :</strong>
+                                <span t-field="o.date_order"/>
+                            </td>
+                            <td style="width:50%; padding:5px;">
+                                <strong>Purchase Requisition No :</strong>
+                                <span t-field="o.name"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>Requested By :</strong>
+                                <span t-field="o.requested_by"/>
+                            </td>
+                            <td style="padding:5px;">
+                                <strong>Date Required :</strong>
+                                <span t-field="o.date_required"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>Project :</strong>
+                                <span t-field="o.project"/>
+                            </td>
+                            <td style="padding:5px;">
+                                <strong>Delivery Address :</strong>
+                                <span t-field="o.delivery_address"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>Suggested Vendor :</strong>
+                                <span t-field="o.partner_id.name"/>
+                            </td>
+                            <td style="padding:5px;">
+                                <strong>Email :</strong>
+                                <span t-field="o.partner_id.email"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>Contact No :</strong>
+                                <span t-field="o.partner_id.phone"/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                    <br/>
+
+                    <!-- TABLE ITEMS -->
+                    <table style="width:100%; border:1px solid black; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th style="border:1px solid black;">DESCRIPTION</th>
+                                <th style="border:1px solid black;">Qty</th>
+                                <th style="border:1px solid black;">Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.order_line" t-as="line">
+                                <tr>
+                                    <td style="border:1px solid black;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:center;">
+                                        <span t-field="line.product_qty"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        <span t-field="line.remark"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div style="text-align:center; margin-top:20px;">
+                        <img src="/invoice_task_detail/static/src/img/footer.png"
+                             style="max-width:100%; height:auto;"/>
+                    </div>
+
+                </div>
+                </main>
+
+            </t>
+        </t>
+    </template>
+</odoo>

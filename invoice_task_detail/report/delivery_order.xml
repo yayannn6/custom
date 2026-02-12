@@ -1,0 +1,114 @@
+<odoo>
+
+    <!-- TEMPLATE BARU -->
+    <template id="report_delivery_document_custom">
+
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <!-- ⚠️ MAIN IS MANDATORY -->
+                <main>
+
+                <div class="page" style="font-family:Times New Roman; font-size:13px;">
+
+                    <h2 style="text-align:center; font-weight:bold;">
+                        DELIVERY ORDER
+                    </h2>
+
+                    <!-- HEADER BOX -->
+                    <table style="width:100%; border:2px solid black; border-collapse:collapse; margin-bottom:20px;">
+                        <tr>
+                            <td style="width:50%; padding:5px;">
+                                <strong>To</strong> :
+                                <span t-field="o.partner_id.name"/>
+                            </td>
+                            <td style="width:50%; padding:5px;">
+                                <strong>DO No.</strong> :
+                                <span t-field="o.name"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>Attn</strong> :
+                                <span t-field="o.attn"/>
+                            </td>
+                            <td style="padding:5px;">
+                                <strong>Date</strong> :
+                                <span t-field="o.scheduled_date"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding:5px;">
+                                <strong>From</strong> :
+                                <span t-field="o.company_id.name"/>
+                            </td>
+                            <td style="padding:5px;">
+                                <strong>PO No.</strong> :
+                                <span t-field="o.po_no"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td style="padding:5px;">
+                                <strong>Page</strong> :
+                                <span class="page"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- TABLE -->
+                    <table style="width:100%; border:2px solid black; border-collapse:collapse; min-height:400px;">
+                        <thead>
+                            <tr>
+                                <th style="border:1px solid black; width:10%;">S/No.</th>
+                                <th style="border:1px solid black; width:70%;">Description</th>
+                                <th style="border:1px solid black; width:20%;">Qty</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="o.move_ids_without_package" t-as="line">
+                                <tr>
+                                    <td style="border:1px solid black; text-align:center;">
+                                        <span t-esc="i"/>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        <span t-field="line.product_id.display_name"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:center;">
+                                        <span t-field="line.quantity_done"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <!-- Space kosong -->
+                            <tr>
+                                <td style="border:1px solid black; height:350px;"></td>
+                                <td style="border:1px solid black;"></td>
+                                <td style="border:1px solid black;"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <br/><br/><br/>
+
+                    <div style="text-align:center;">
+                        Approved By
+                        <br/><br/><br/>
+                        Name, Signature, Co. Stamp &amp; Date
+                    </div>
+
+                </div>
+                </main>
+
+            </t>
+        </t>
+
+    </template>
+
+</odoo>

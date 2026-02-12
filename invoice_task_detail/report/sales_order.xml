@@ -1,0 +1,159 @@
+<odoo>
+    <template id="report_saleorder_custom" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page" style="font-family:Times New Roman; font-size:13px;">
+
+                <!-- TITLE -->
+                <h2 style="text-align:center; font-weight:bold;">
+                    QUOTATION
+                </h2>
+
+                <!-- HEADER BOX -->
+                <table style="width:100%; border:2px solid black; border-collapse:collapse; margin-bottom:20px;">
+                    <tr>
+                        <td style="width:50%; padding:5px;">
+                            <strong>Date</strong> :
+                            <span t-field="doc.date_order"/>
+                        </td>
+                        <td style="width:50%; padding:5px;">
+                            <strong>Our Ref</strong> :
+                            <span t-field="doc.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:5px;">
+                            <strong>To</strong> :
+                            <span t-field="doc.partner_id.name"/>
+                        </td>
+                        <td style="padding:5px;">
+                            <strong>Tel</strong> :
+                            <span t-field="doc.partner_id.phone"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:5px;">
+                            <strong>Attn</strong> :
+                            <span t-field="doc.partner_id.name"/>
+                        </td>
+                        <td style="padding:5px;">
+                            <strong>Page</strong> :
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:5px;">
+                            <strong>From</strong> :
+                            <span t-field="doc.company_id.name"/>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <!-- REFERENCE -->
+                <p>
+                    <strong>RE :</strong>
+                    <span t-field="doc.client_order_ref"/>
+                </p>
+
+                <hr style="border:1px solid black;"/>
+
+                <p>
+                    Dear Sir / Mdm,<br/>
+                    With reference to your enquiry regarding the above mentioned subject,
+                    we are pleased to submit our quotation as follows :-
+                </p>
+
+                <!-- MAIN TABLE -->
+                <table style="width:100%; border:2px solid black; border-collapse:collapse; min-height:400px;">
+                    <thead>
+                        <tr>
+                            <th style="border:1px solid black; width:8%;">S/No.</th>
+                            <th style="border:1px solid black; width:52%;">Description</th>
+                            <th style="border:1px solid black; width:10%;">Qty</th>
+                            <th style="border:1px solid black; width:15%;">Unit Price (S$)</th>
+                            <th style="border:1px solid black; width:15%;">Total Amount (S$)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <tr>
+                                <td style="border:1px solid black; text-align:center;">
+                                    <span t-esc="i"/>
+                                    <t t-set="i" t-value="i+1"/>
+                                </td>
+                                <td style="border:1px solid black;">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td style="border:1px solid black; text-align:center;">
+                                    <span t-field="line.product_uom_qty"/>
+                                </td>
+                                <td style="border:1px solid black; text-align:right;">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td style="border:1px solid black; text-align:right;">
+                                    <span t-field="line.price_subtotal"/>
+                                </td>
+                            </tr>
+                        </t>
+
+                        <!-- EMPTY ROW SPACE -->
+                        <tr>
+                            <td style="border:1px solid black; height:250px;"></td>
+                            <td style="border:1px solid black;"></td>
+                            <td style="border:1px solid black;"></td>
+                            <td style="border:1px solid black;"></td>
+                            <td style="border:1px solid black;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- TOTAL SECTION -->
+                <table style="width:35%; float:right; border-collapse:collapse; margin-top:10px;">
+                    <tr>
+                        <td style="border:1px solid black; padding:5px;"><strong>Total</strong></td>
+                        <td style="border:1px solid black; padding:5px; text-align:right;">
+                            <span t-field="doc.amount_untaxed"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid black; padding:5px;"><strong>9% GST</strong></td>
+                        <td style="border:1px solid black; padding:5px; text-align:right;">
+                            <span t-field="doc.amount_tax"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid black; padding:5px;"><strong>Net Total</strong></td>
+                        <td style="border:1px solid black; padding:5px; text-align:right;">
+                            <span t-field="doc.amount_total"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="clear:both;"></div>
+
+                <br/><br/>
+
+                <!-- FOOTER NOTES -->
+                <p>
+                    <strong>Currency</strong> : <span t-field="doc.currency_id.name"/><br/>
+                    <strong>Delivery</strong> : 4 weeks completion upon PO received<br/>
+                    <strong>Validity</strong> : 30 days from date hereof<br/>
+                    <strong>Payment Terms</strong> : 30% deposit upon confirmation, 70% upon completion.<br/>
+                    <strong>Tax</strong> : Subject to 9% GST
+                </p>
+
+                <br/>
+
+                <p>
+                    Anything not stated in the quotation is excluded, any variation will be charged accordingly.<br/>
+                    We hope that our quotation will meet your kind consideration and looking forward to hear from you soon.
+                </p>
+
+            </div>
+        </xpath>
+
+    </template>
+</odoo>

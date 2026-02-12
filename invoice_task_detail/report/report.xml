@@ -8,4 +8,34 @@
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="binding_type">report</field>
     </record>
+
+    <record id="action_report_purchase_request" model="ir.actions.report">
+        <field name="name">Purchase Request</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_task_detail.report_purchase_requisition</field>
+        <field name="report_file">invoice_task_detail.report_purchase_requisition</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_print_quotation_mec" model="ir.actions.report">
+        <field name="name">Print Quotation</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_task_detail.report_saleorder_custom</field>
+        <field name="report_file">invoice_task_detail.report_saleorder_custom</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_print_delivery_order" model="ir.actions.report">
+        <field name="name">Print Delivery Order</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_task_detail.report_delivery_document_custom</field>
+        <field name="report_file">invoice_task_detail.report_delivery_document_custom</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

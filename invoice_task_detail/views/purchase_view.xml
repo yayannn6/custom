@@ -1,0 +1,44 @@
+<odoo>
+
+    <!-- ========================= -->
+    <!-- PURCHASE ORDER FORM VIEW  -->
+    <!-- ========================= -->
+
+    <record id="view_purchase_order_form_inherit_custom" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Tambah field setelah partner_id -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="attn"/>
+                <field name="requested_by"/>
+                <field name="date_required"/>
+                <field name="project"/>
+                <field name="delivery_address"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- ========================= -->
+    <!-- PURCHASE ORDER LINE VIEW  -->
+    <!-- ========================= -->
+
+    <record id="view_purchase_order_line_tree_inherit_custom" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree.inherit.custom</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+
+            <!-- Tambah kolom remark setelah name/description -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="remark"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
