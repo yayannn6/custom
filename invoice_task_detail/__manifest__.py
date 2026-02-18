@@ -17,6 +17,7 @@
         "report/purchase_request.xml",
         "report/sales_order.xml",
         "report/delivery_order.xml",
+        "report/purchase_order.xml",
     ],
     "installable": True,
 }

@@ -59,8 +59,11 @@
                         <span t-field="doc.client_order_ref"/>
                     </p>
 
-                    <hr style="border:1px solid black;"/>
-
+                    <!-- <hr style="border:1px solid black;"/> -->
+                    <p>
+                      Dear Sir / Mdm, <br/>
+                      With reference to your enquiry regarding the above mentioned subject, we are pleased to submit our quotation as follows :
+                    </p>
                     <!-- TABLE -->
                     <table style="width:100%; border:2px solid black; border-collapse:collapse; min-height:400px;">
                         <thead>
@@ -123,6 +126,22 @@
                             <td style="border:1px solid black;"><strong>Net Total</strong></td>
                             <td style="border:1px solid black; text-align:right;">
                                 <span t-field="doc.amount_total"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br/><br/>
+                    
+                    <table style="width:100%; margin-top:40px;">
+                        <tr>
+                            <td style="width:60%;">
+                                Yours faithfully,<br/><br/>
+                                <strong style="font-size:32px;">Sebastian Ong</strong><br/>
+                                Project Director
+                            </td>
+                            <td style="width:40%; text-align:left;">
+                                Accepted By<br/><br/><br/>
+                                Name, Signature, Co. Stamp &amp; Date
                             </td>
                         </tr>
                     </table>
