@@ -19,12 +19,12 @@
         <field name="binding_type">report</field>
     </record>
 
-    <record id="action_report_mec_purchase_order" model="ir.actions.report">
+    <record id="report_mec_purchase_order" model="ir.actions.report">
         <field name="name">Purchase Order</field>
         <field name="model">purchase.order</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">invoice_task_detail.report_mec_purchase_order</field>
-        <field name="report_file">invoice_task_detail.report_mec_purchase_order</field>
+        <field name="report_name">invoice_task_detail.report_purchase_order_smitiv</field>
+        <field name="report_file">invoice_task_detail.report_purchase_order_smitiv</field>
         <field name="binding_model_id" ref="purchase.model_purchase_order"/>
         <field name="binding_type">report</field>
     </record>

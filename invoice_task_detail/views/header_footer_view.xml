@@ -1,0 +1,19 @@
+<odoo>
+    <template id="report_header_smitiv">
+        <div class="header">
+            <div style="text-align:center; margin-bottom:10px;">
+                <img src="/invoice_task_detail/static/src/img/header.png" style="max-width:100%; height:auto;"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_footer_smitiv">
+        <div class="footer">
+            <div style="text-align:center; margin-top:20px;">
+                <img src="/invoice_task_detail/static/src/img/footer.png" style="max-width:60%; height:auto;"/>
+            </div>
+        </div>
+    </template>
+            
+
+</odoo>

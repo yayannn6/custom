@@ -1,12 +1,19 @@
 <odoo>
 
 <template id="report_invoice_task">
-    <t t-call="web.external_layout">
+            <t t-call="web.external_layout">
+                <main>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="invoice_task_detail.report_header_smitiv"/>
+                        <t t-call="invoice_task_detail.report_invoice_task_document"/>
+                        <t t-call="invoice_task_detail.report_footer_smitiv"/>
+                    </t>
+                </main>
+            </t>
+</template>
 
-        <t t-foreach="docs" t-as="o">
-
-            <!-- ⚠️ MAIN IS MANDATORY -->
-            <main>
+<template id="report_invoice_task_document">
+    <div class="page">
 
                 <style>
                     .invoice-title {
@@ -201,10 +208,7 @@
                     <span t-field="o.narration"/>
                 </p>
 
-            </main>
-
-        </t>
-    </t>
+    </div>
 </template>
 
 </odoo>

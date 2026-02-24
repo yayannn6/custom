@@ -11,6 +11,7 @@
         "views/purchase_view.xml",
         "views/sales_order.xml",
         "views/delivery_order_view.xml",
+        "views/header_footer_view.xml",
         "security/ir.model.access.csv",
         "report/report_tax_invoice.xml",
         "report/report.xml",

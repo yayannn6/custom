@@ -1,12 +1,19 @@
 <odoo>
 
-    <!-- TEMPLATE BARU -->
-    <template id="report_delivery_document_custom">
-
-        <t t-call="web.external_layout">
-            <t t-foreach="docs" t-as="o">
-                <!-- ⚠️ MAIN IS MANDATORY -->
+    <template id="report_delivery_order">
+            <t t-call="web.external_layout">
                 <main>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="invoice_task_detail.report_header_smitiv"/>
+                        <t t-call="invoice_task_detail.report_delivery_order_document"/>
+                        <t t-call="invoice_task_detail.report_footer_smitiv"/>
+                    </t>
+                </main>
+            </t>
+    </template>
+
+    <!-- TEMPLATE BARU -->
+    <template id="report_delivery_order_document">
 
                 <div class="page" style="font-family:Times New Roman; font-size:13px;">
 
@@ -104,10 +111,7 @@
                     </div>
 
                 </div>
-                </main>
-
-            </t>
-        </t>
+               
 
     </template>
 

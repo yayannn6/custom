@@ -1,211 +1,192 @@
 <odoo>
 
-<template id="report_mec_purchase_order">
-    <t t-call="web.external_layout">
+    <template id="report_purchase_order_smitiv">
+            <t t-call="web.external_layout">
+                <main>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="invoice_task_detail.report_header_smitiv"/>
+                        <t t-call="invoice_task_detail.report_purchase_order_smitiv_document"/>
+                        <t t-call="invoice_task_detail.report_footer_smitiv"/>
+                    </t>
+                </main>
+            </t>
+    </template>
 
-        <t t-foreach="docs" t-as="o">
+    <template id="report_purchase_order_smitiv_document">
+            <div class="page">
+                    <style>
+                        .invoice-title {
+                            text-align: center;
+                            font-size: 18px;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                        }
+                        .header-table td {
+                            padding: 2px 5px;
+                            font-size: 12px;
+                            vertical-align: top;
+                        }
+                        .task-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-size: 12px;
+                            margin-top: 10px;
+                            border: 1px solid black;
+                        }
+                        .task-table th {
+                            border: 1px solid black;
+                        }
 
-            <!-- ⚠️ MAIN IS MANDATORY -->
-            <main>
+                        .task-table td {
+                            padding: 5px;
+                        }
 
-                <style>
-                    .invoice-title {
-                        text-align: center;
-                        font-size: 18px;
-                        font-weight: bold;
-                        margin-bottom: 10px;
-                    }
-                    .header-table td {
-                        padding: 2px 5px;
-                        font-size: 12px;
-                        vertical-align: top;
-                    }
-                    .task-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        font-size: 12px;
-                        margin-top: 10px;
-                        border: 1px solid black;
-                    }
-                    .task-table th {
-                        border: 1px solid black;
-                    }
+                        .task-table tbody td {
+                            border-left: 1px solid black;
+                            border-right: 1px solid black;
+                            border-top: none;
+                            border-bottom: none;
+                        }
 
-                    .task-table td {
-                        padding: 5px;
-                    }
+                        .task-table tbody tr:last-child td {
+                            border-bottom: 1px solid black;
+                        }
 
-                    .task-table tbody td {
-                        border-left: 1px solid black;
-                        border-right: 1px solid black;
-                        border-top: none;
-                        border-bottom: none;
-                    }
+                        .text-right {
+                            text-align: right;
+                        }
+                        .text-center {
+                            text-align: center;
+                        }
 
-                    .task-table tbody tr:last-child td {
-                        border-bottom: 1px solid black;
-                    }
+                        .total-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-size: 12px;
+                            margin-top: 10px;
+                        }
+                    </style>
 
-                    .text-right {
-                        text-align: right;
-                    }
-                    .text-center {
-                        text-align: center;
-                    }
+                    <!-- TITLE -->
+                    <h2 style="text-align:center; font-weight:bold;">
+                        PURCHASE ORDER
+                    </h2>
 
-                    .total-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        font-size: 12px;
-                        margin-top: 10px;
-                    }
-                </style>
+                    <!-- HEADER INFO -->
+                    <table style="width:100%; border:1px solid black; border-collapse:collapse;">
+                        <tr>
+                            <td style="width:50%; padding:5px;">
+                                <b>To :</b> <span t-field="o.partner_id.name"/><br/>
+                                <b>QN :</b><br/>
+                                <b>Attn :</b><br/>
+                                <b>From :</b>
+                            </td>
+                            <td style="width:50%; padding:5px;">
+                                <b>PO No :</b> <span t-field="o.name"/><br/>
+                                <b>Date :</b> <span t-field="o.date_order"/><br/>
+                                <b>Page :</b> 1 Page
+                            </td>
+                        </tr>
+                    </table>
 
-                <!-- TITLE -->
-                <div class="invoice-title">PURCHASE ORDER</div>
+                    <br/>
 
-                <!-- HEADER -->
-                <table class="header-table" style="border: 1px solid black;" width="100%">
-                    <tr>
-                        <!-- LEFT -->
-                        <td width="50%" valign="top">
-                            <table width="100%">
+                    <!-- TABLE PRODUCT -->
+                    <table style="width:100%; border:1px solid black; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th style="border:1px solid black;">S/No.</th>
+                                <th style="border:1px solid black;">Description</th>
+                                <th style="border:1px solid black;">QTY</th>
+                                <th style="border:1px solid black;">Unit Price $</th>
+                                <th style="border:1px solid black;">Amount in $</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="o.order_line" t-as="line">
                                 <tr>
-                                    <td width="30%"><strong>To</strong></td>
-                                    <td width="5%">:</td>
-                                    <td width="65%"><span t-field="o.partner_id.name"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>QN</strong></td>
-                                    <td>:</td>
-                                    <td>
-                                        <span t-field="o.partner_id.name"/><br/>
+                                    <td style="border:1px solid black; text-align:center;">
+                                        <span t-esc="i"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-field="line.product_qty"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-field="line.price_subtotal"/>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Attn</strong></td>
-                                    <td>:</td>
-                                    <td><span t-field="o.attn"/></td>
-                                </tr>
-                            </table>
-                        </td>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                        </tbody>
+                    </table>
 
-                        <!-- RIGHT -->
-                        <td width="50%" valign="top">
-                            <table width="100%">
-                                <tr>
-                                    <td width="30%"><strong>Invoice Ref</strong></td>
-                                    <td width="5%">:</td>
-                                    <td width="65%"><span t-field="o.name"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Our Ref</strong></td>
-                                    <td>:</td>
-                                    <td><span t-field="o.ref"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>PO Number</strong></td>
-                                    <td>:</td>
-                                    <td><span t-field="o.invoice_origin"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Terms</strong></td>
-                                    <td>:</td>
-                                    <td><span t-field="o.invoice_payment_term_id.name"/></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Page</strong></td>
-                                    <td>:</td>
-                                    <td>1 page</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                    <br/>
 
-
-                <!-- TASK TABLE -->
-                <table class="task-table">
-                    <thead>
+                     <!-- TABLE INFO -->
+                     <table style="width:100%; border:1px solid black; border-collapse:collapse;">
                         <tr>
-                            <th width="55%">Description</th>
-                            <th width="10%">Qty</th>
-                            <th width="15%">Unit Price (S$)</th>
-                            <th width="20%">Total Price (S$)</th>
+                            <td style="padding:5px;">
+                                <strong>Requested By :</strong>
+
+                    <!-- TOTAL AREA -->
+                    <table style="width:100%; border-collapse:collapse;">
+                        <tr>
+                            <td style="width:70%;"/>
+                            <td style="width:30%;">
+                                <table style="width:100%; border:1px solid black; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="border:1px solid black;">Total</td>
+                                        <td style="border:1px solid black; text-align:right;">
+                                            <span t-field="o.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;">9% GST</td>
+                                        <td style="border:1px solid black; text-align:right;">
+                                            <span t-field="o.amount_tax"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;"><b>Net Total</b></td>
+                                        <td style="border:1px solid black; text-align:right;">
+                                            <b><span t-field="o.amount_total"/></b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="o.task_line_ids" t-as="line">
-                            <tr>
-                                <td>
-                                    <t t-esc="line.description"/>
-                                </td>
-                                <td class="text-center">
-                                    <t t-if="line.quantity">
-                                        <t t-esc="line.quantity"/> <t t-esc="line.uom"/>
-                                    </t>
-                                </td>
+                    </table>
 
-                                <td class="text-right">
-                                    <t t-if="line.price">
-                                        <t t-esc="line.price"/>
-                                    </t>
-                                </td>
+                    <br/>
 
-                                <td class="text-right">
-                                    <t t-if="line.total">
-                                        <t t-esc="line.total"/>
-                                    </t>
-                                </td>
+                    <!-- NOTES -->
+                    <div style="font-size:11px;">
+                        <b>Please Note :</b><br/>
+                        1 Delivery should be made to the above address or any other address specified by us.<br/>
+                        2 Supply shall be in accordance with instructions, no substitute parts will be accepted without prior approval.<br/>
+                        3 Delivery shall be on or before the Delivery Date stipulated above.<br/>
+                        4 The supplier shall inform immediately, if for any reason, delivery is unable to adhere to these instructions.<br/>
+                        5 The Company will not be liable for any goods received unless this order carries an authorized signature.
+                    </div>
 
-                            </tr>
-                        </t>
-                    </tbody>
-                </table>
+                    <br/><br/>
 
-                <!-- TOTALS -->
-                <table class="total-table">
-                    <tr>
-                        <td width="80%" class="text-right"><strong>Subtotal</strong></td>
-                        <td width="20%" class="text-right">
-                            <t t-esc="o.amount_before_tax_manual"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="80%" class="text-right"><strong>GST 9%</strong></td>
-                        <td width="20%" class="text-right">
-                            <t t-esc="o.gst_amount"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="80%" class="text-right"><strong>Total</strong></td>
-                        <td width="20%" class="text-right">
-                            <t t-esc="o.grand_total"/>
-                        </td>
-                    </tr>
-                </table>
+                    <!-- SIGNATURE -->
+                    <div style="text-align:right;">
+                        Approved By<br/><br/>
+                        <b style="font-size:18px;">
+                            Sebastian Ong
+                        </b>
+                    </div>
 
-                <!-- AMOUNT IN WORDS -->
-                <p style="font-size:12px;">
-                    <strong>
-                        Singapore Dollars :
-                        <t t-esc="o.currency_id.amount_to_text(o.grand_total)"/>
-                    </strong>
-                </p>
-
-                <!-- FOOTER -->
-                <p style="font-size:11px;">
-                    <span t-field="o.narration"/>
-                </p>
-
-                <h3 style="font-size:22px; font-weight:bold;">
-                    Kumar
-                </h3>
-
-            </main>
-
-        </t>
-    </t>
-</template>
+            </div>
+    </template>
 
 </odoo>

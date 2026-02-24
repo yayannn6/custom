@@ -1,15 +1,24 @@
 <odoo>
     <template id="report_purchase_requisition">
-        <t t-call="web.external_layout">
-            <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
                 <main>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="invoice_task_detail.report_header_smitiv"/>
+                        <t t-call="invoice_task_detail.report_purchase_requisition_document"/>
+                        <t t-call="invoice_task_detail.report_footer_smitiv"/>
+                    </t>
+                </main>
+            </t>
+    </template>
+
+    <template id="report_purchase_requisition_document">
+        <!-- <t t-call="web.external_layout"> -->
+            <!-- <t t-foreach="docs" t-as="o"> -->
+                <!-- <main> -->
 
                 <div class="page">
 
-                    <div style="text-align:center; margin-bottom:10px;">
-                        <img src="/invoice_task_detail/static/src/img/header.png"
-                             style="max-width:100%; height:auto;"/>
-                    </div>
+                    
                     <t t-if="o.state == 'draft'">
                         <h2 style="text-align:center;">
                             PURCHASE REQUISITION FORM
@@ -108,15 +117,10 @@
                         </tbody>
                     </table>
 
-                    <div style="text-align:center; margin-top:20px;">
-                        <img src="/invoice_task_detail/static/src/img/footer.png"
-                             style="max-width:100%; height:auto;"/>
-                    </div>
-
                 </div>
-                </main>
+                <!-- </main> -->
 
-            </t>
-        </t>
+            <!-- </t> -->
+        <!-- </t> -->
     </template>
 </odoo>
