@@ -48,4 +48,14 @@
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
     </record>
+    <record id="statement_of_account_report" model="ir.actions.report">
+        <field name="name">Statement of Account</field>
+        <field name="model">statement.of.account.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_task_detail.statement_template</field>
+        <field name="report_file">invoice_task_detail.statement_template</field>
+        <field name="binding_model_id" ref="invoice_task_detail.model_statement_of_account_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+    
 </odoo>

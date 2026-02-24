@@ -1,0 +1,165 @@
+<odoo>
+    <template id="statement_template">
+        <t t-call="web.html_container">
+            <div class="page">
+
+                <h2 style="text-align:center; margin-bottom:20px;">
+                    STATEMENT OF ACCOUNT
+                </h2>
+
+                <table style="width:100%; border:1px solid black; border-collapse:collapse; font-size:13px;">
+                    <tr>
+                        <td style="width:15%; padding:4px;"><strong>Statement As At</strong></td>
+                        <td style="width:2%;">:</td>
+                        <td style="width:33%; padding:4px;">
+                            <span t-esc="wizard.date_as_at"/>
+                        </td>
+
+                        <td style="width:25%; padding:4px;">
+                            <strong>IN - Invoice</strong>
+                        </td>
+                        <td style="width:25%; padding:4px;">
+                            <strong>RC - Receipt</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:4px;"><strong>To</strong></td>
+                        <td>:</td>
+                        <td style="padding:4px;">
+                            <span t-esc="partner.name"/><br/>
+                            <span t-esc="partner.street"/><br/>
+                            <span t-esc="partner.city"/>
+                        </td>
+
+                        <td style="padding:4px;">
+                            <strong>CN - Credit Note</strong>
+                        </td>
+                        <td style="padding:4px;">
+                            <strong>CT - Contra</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:4px;"><strong>Tel.</strong></td>
+                        <td>:</td>
+                        <td style="padding:4px;">
+                            <span t-esc="partner.phone"/>
+                        </td>
+
+                        <td style="padding:4px;"><strong>Customer Code</strong></td>
+                        <td style="padding:4px;">
+                            <span t-esc="partner.ref"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:4px;"><strong>Attn</strong></td>
+                        <td>:</td>
+                        <td style="padding:4px;"></td>
+
+                        <td style="padding:4px;"><strong>Payment Terms</strong></td>
+                        <td style="padding:4px;">
+                            <span t-esc="partner.property_payment_term_id.name"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:4px;"><strong>CC</strong></td>
+                        <td>:</td>
+                        <td style="padding:4px;"></td>
+
+                        <td style="padding:4px;"><strong>Page</strong></td>
+                        <td style="padding:4px;">
+                            <span class="page"/> of <span class="topage"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td style="padding:4px;"><strong>Currency Code</strong></td>
+                        <td style="padding:4px;">
+                            SGD
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <!-- LEDGER -->
+                <table class="table table-sm mt32" border="1">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Due Date</th>
+                            <th>Move</th>
+                            <th class="text-end">Debit</th>
+                            <th class="text-end">Credit</th>
+                            <th class="text-end">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="lines" t-as="l">
+                            <tr>
+                                <td t-esc="l.date"/>
+                                <td t-esc="l.date_maturity"/>
+                                <td t-esc="l.move_id.name"/>
+                                <td class="text-end">
+                                    $ <span t-esc="l.debit"/>
+                                </td>
+
+                                <td class="text-end">
+                                    $ <span t-esc="l.credit"/>
+                                </td>
+
+                                <td class="text-end">
+                                    $ <span t-esc="l.amount_residual"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+
+                <!-- AGING -->
+                <h4 class="mt32">Aged by Due Date</h4>
+
+                <table class="table table-sm" border="1" style="width:100%;">
+                    <tr>
+                        <th>Total O/S</th>
+                        <th>
+                            <span t-esc="header_type"/> as on 
+                            <span t-esc="wizard.date_as_at"/>
+                        </th>
+                        <th>1 to 30 Days</th>
+                        <th>31 to 60 Days</th>
+                        <th>61 to 90 Days</th>
+                        <th>Over 90 Days</th>
+                    </tr>
+                    <tr>
+                        <td class="text-end">
+                            $ <span t-esc="aging['total']"/>
+                        </td>
+                        <td></td>
+                        <td class="text-end">
+                            $ <span t-esc="aging['1_30']"/>
+                        </td>
+                        <td class="text-end">
+                            $ <span t-esc="aging['31_60']"/>
+                        </td>
+                        <td class="text-end">
+                            $ <span t-esc="aging['61_90']"/>
+                        </td>
+                        <td class="text-end">
+                            $ <span t-esc="aging['over_90']"/>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </t>
+    </template>
+</odoo>

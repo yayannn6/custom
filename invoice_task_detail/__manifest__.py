@@ -12,6 +12,7 @@
         "views/sales_order.xml",
         "views/delivery_order_view.xml",
         "views/header_footer_view.xml",
+
         "security/ir.model.access.csv",
         "report/report_tax_invoice.xml",
         "report/report.xml",
@@ -19,6 +20,8 @@
         "report/sales_order.xml",
         "report/delivery_order.xml",
         "report/purchase_order.xml",
+        "report/statement_template.xml",
+        "wizard/statement_report_wizard_view.xml",
     ],
     "installable": True,
 }

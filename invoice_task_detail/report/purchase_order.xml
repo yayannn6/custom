@@ -127,14 +127,6 @@
                         </tbody>
                     </table>
 
-                    <br/>
-
-                     <!-- TABLE INFO -->
-                     <table style="width:100%; border:1px solid black; border-collapse:collapse;">
-                        <tr>
-                            <td style="padding:5px;">
-                                <strong>Requested By :</strong>
-
                     <!-- TOTAL AREA -->
                     <table style="width:100%; border-collapse:collapse;">
                         <tr>
