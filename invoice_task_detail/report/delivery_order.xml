@@ -4,9 +4,9 @@
             <t t-call="web.external_layout">
                 <main>
                     <t t-foreach="docs" t-as="o">
-                        <t t-call="invoice_task_detail.report_header_smitiv"/>
+                        <!-- <t t-call="invoice_task_detail.report_header_smitiv"/> -->
                         <t t-call="invoice_task_detail.report_delivery_order_document"/>
-                        <t t-call="invoice_task_detail.report_footer_smitiv"/>
+                        <!-- <t t-call="invoice_task_detail.report_footer_smitiv"/> -->
                     </t>
                 </main>
             </t>
